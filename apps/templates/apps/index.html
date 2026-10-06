@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- Hero Section -->
+  <section id="hero" class="hero section dark-background">
+    {% for post in starting_page %}
+      <img src="{{ post.image.url }}" alt="{{ post.name }}" />
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <h3>{{ post.name }}</h3>
+
+        <p>
+          I'm
+          <span class="typed" data-typed-items="{{ post.content }}"></span>
+        </p><br /><br />
+        <div class="caption">{{ post.caption }}</div>
+        <a href="{% url 'contact' %}" id="contactButton" class="contact-btn">
+          <span>Contact Me</span>
+          <i class="bi bi-telephone-minus-fill"></i>
+        </a>
+        {% comment %} <p>
+          I'm
+          <span class="typed" data-typed-items="Python Developer, Django Developer, IT Officer, Freelancer"></span>
+        </p> {% endcomment %}
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}

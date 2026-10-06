@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+    <!-- Resume Section -->
+<section id="resume" class="resume section">
+
+      <!-- Section Title -->
+      <div class="container-fluid ps-5 section-title" data-aos="fade-up">
+        <h2>Resume</h2>
+        <p>With the aim to assist and use my ability and my past experiences to apply in the field thus to contribute to the country’s development in the year coming.</p>
+      </div><!-- End Section Title -->
+  <div class="container-fluid ps-5">
+    <div class="row">
+      {% if summary %}
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">{{summary.title}}</h3>
+
+            <div class="resume-item pb-0">
+              {% comment %} <h4>{{summary.name}}</h4> {% endcomment %}
+              <p style="text-align: justify;">
+    <em>{{ summary.description }}</em>
+</p>
+              <ul>
+                <li>{{summary.address}}</li>
+                <li>{{summary.phone}}</li>
+                <li>{{summary.email}}</li>
+              </ul>
+            </div><!-- Edn Resume Item -->
+  {% endif %}
+            <h3 class="resume-title">Education</h3>
+            {% for education in education_data %}
+            <div class="resume-item">
+              <h4>{{education.degree}}</h4>
+              <h5>{{education.start_year}} - {{education.end_year}}</h5>
+              <p><em>{{education.institution}}, {{education.location}}</em></p>
+              <p>{{education.description}}</p>
+            </div><!-- Edn Resume Item -->
+{% endfor %}
+
+        <h3 class="resume-title">Non-Formal Education</h3>
+            {% for course in non_formal_education_data %}
+            <div class="resume-item">
+              <h4>{{course.course_name}}</h4>
+              {% for education in course.education_data.all %}
+              <h5>{{education.start_year}} - {{education.end_year}}</h5>
+              <p><em>{{education.institution}}, {{education.location}}</em></p>
+             {% endfor %}
+            </div><!-- Edn Resume Item -->
+{% endfor %}
+          </div>
+          
+
+
+
+
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">Professional Experience</h3>
+            {% for experience in experience_data %}
+            <div class="resume-item">
+              <h4>{{experience.position}}</h4>
+              <h5>{{experience.start_date}} - {{experience.end_date}}</h5>
+              <p><em>{{experience.company}}, {{experience.location}}</em></p>
+              {% for responsibility in experience.responsibilities.all %}
+              <ul>
+                <li>{{responsibility.description}}</li>
+                </ul>
+              {% endfor %}
+            </div><!-- Edn Resume Item -->
+{% endfor %}
+
+<div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">Technical Skills</h3>
+            {% for skill in technical_skill_data %}
+            <div class="resume-item">
+              
+              
+              <strong>{{skill.title}} </strong> : 
+              <ul>
+                {% for item in skill.skill_data.all  %}
+                <li>{{item.description}}</li>
+               {% endfor %}
+              </ul>
+            </div><!-- Edn Resume Item -->
+{% endfor %}
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+{% endblock content %}
